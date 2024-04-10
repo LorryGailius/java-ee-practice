@@ -19,7 +19,7 @@ public class Author {
         Id = id;
     }
 
-    @OneToMany(mappedBy = "Author")
+    @OneToMany(mappedBy = "Author", fetch = FetchType.LAZY)
     private List<Book> Books;
 
     public List<Book> getBooks() {

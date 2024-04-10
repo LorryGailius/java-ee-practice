@@ -10,11 +10,9 @@ import lt.vu.persistence.BookDAO;
 import lt.vu.persistence.GenreDAO;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Intercepted;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.interceptor.Interceptor;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;

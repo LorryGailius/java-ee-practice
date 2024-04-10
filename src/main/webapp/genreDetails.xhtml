@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core"
+>
+<h:head>
+    <h:outputStylesheet library="css" name="styles.css"/>
+    <title>#{genreBooks.genre.name} books</title>
+</h:head>
+
+<h:body>
+    <div class="navbar">
+        <h:link outcome="index" value="Authors" styleClass="nav-link"/>
+        <h:link outcome="genres" value="Genres" styleClass="nav-link"/>
+        <h:link outcome="books" value="Books" styleClass="nav-link"/>
+    </div>
+
+    <div class="page">
+        <h2>#{genreBooks.genre.name} books</h2>
+
+        <h:panelGroup rendered="#{empty genreBooks.genre.books}">
+            <h3>No books found</h3>
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{not empty genreBooks.genre.books}">
+            <table class="book-table">
+                <thead>
+                <tr>
+                    <th>Book name</th>
+                    <th>Book author</th>
+                    <th>Book genres</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ui:repeat value="#{genreBooks.genre.books}" var="book">
+                    <tr>
+                        <td>#{book.title}</td>
+                        <td>
+                            <h:link outcome="authorDetails" value="#{book.author.name} #{book.author.surname}">
+                                <f:param name="authorId" value="#{book.author.id}"/>
+                            </h:link>
+                        </td>
+                        <td>
+                            <!-- Display genre with link only if the name is not the same as the page -->
+                            <ui:repeat value="#{book.genres}" var="genre">
+                                <h:link rendered="#{genre.name != genreBooks.genre.name}" outcome="genreDetails" value="#{genre.name} ">
+                                    <f:param name="genreId" value="#{genre.id}"/>
+                                </h:link>
+                                <h:outputText rendered="#{genre.name == genreBooks.genre.name}" value="#{genre.name} "/>
+                            </ui:repeat>
+                        </td>
+                    </tr>
+                </ui:repeat>
+                </tbody>
+            </table>
+        </h:panelGroup>
+    </div>
+</h:body>
+
+</html>

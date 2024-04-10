@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+>
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <h:outputStylesheet library="css" name="styles.css"/>
+    <title>Lab 1 | Laurynas Gailius</title>
+</h:head>
+<h:body>
+    <div class="navbar">
+        <h:link outcome="index" value="Authors" styleClass="nav-link"/>
+        <h:link outcome="genres" value="Genres" styleClass="nav-link"/>
+        <h:link outcome="books" value="Books" styleClass="nav-link"/>
+    </div>
+
+    <div class="page">
+        <h2>Authors</h2>
+        <ol>
+            <ui:repeat value="#{authorsByBatis.allAuthors}" var="author">
+                <li><h:link value="#{author.name} #{author.surname}" outcome="authorDetails?authorId=#{author.id}"/></li>
+            </ui:repeat>
+        </ol>
+
+        <h:form styleClass="add-form">
+            <h:inputText value="#{authorsByBatis.authorToCreate.name}" a:placeholder="First Name" required="true" />
+            <h:inputText value="#{authorsByBatis.authorToCreate.surname}" a:placeholder="Last Name" required="true" />
+            <h:commandButton styleClass="commandButton" value="Add new author" action="#{authorsByBatis.createAuthor}"/>
+        </h:form>
+
+    </div>
+</h:body>
+</html>

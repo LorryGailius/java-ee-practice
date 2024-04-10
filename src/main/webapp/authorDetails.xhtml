@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <h:outputStylesheet library="css" name="styles.css"/>
+    <title>#{authorBooks.author.name} #{authorBooks.author.surname} Book list</title>
+</h:head>
+<h:body>
+    <div class="navbar">
+        <h:link outcome="index" value="Authors" styleClass="nav-link"/>
+        <h:link outcome="genres" value="Genres" styleClass="nav-link"/>
+        <h:link outcome="books" value="Books" styleClass="nav-link"/>
+    </div>
+
+    <div class="page">
+        <h2>#{authorBooks.author.name} #{authorBooks.author.surname} Book list</h2>
+
+        <h:panelGroup rendered="#{empty authorBooks.author.books}">
+            <h3>No books found</h3>
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{not empty authorBooks.author.books}">
+            <table class="book-table">
+                <thead>
+                <tr>
+                    <th>Book name</th>
+                    <th>Book genre</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ui:repeat value="#{authorBooks.author.books}" var="book">
+                    <tr>
+                        <td>#{book.title}</td>
+                        <td>
+                            <ui:repeat value="#{book.genres}" var="genre">
+                                <h:link outcome="genreDetails" value="#{genre.name} ">
+                                    <f:param name="genreId" value="#{genre.id}"/>
+                                </h:link>
+                            </ui:repeat>
+                        </td>
+                    </tr>
+                </ui:repeat>
+                </tbody>
+            </table>
+        </h:panelGroup>
+
+        <h3>Add new book</h3>
+        <h:form styleClass="add-form-no-gap">
+            <h4>Book title</h4>
+            <h:inputText a:placeholder="Book title" value="#{authorBooks.bookToCreate.title}" required="true"/>
+
+            <h:panelGroup rendered="#{empty authorBooks.availableGenres}">
+                <h:outputText value="No genres found"/>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{not empty authorBooks.availableGenres}">
+                <div class="genre-checklist-wrapper">
+                    <h4>Select Genres</h4>
+                    <h:selectManyCheckbox styleClass="genre-checklist" value="#{authorBooks.bookToCreate.genres}">
+                        <f:selectItems value="#{authorBooks.availableGenres}"
+                                       var="genre"
+                                       itemValue="#{genre}"
+                                       itemLabel="#{genre.name}"/>
+                    </h:selectManyCheckbox>
+                </div>
+            </h:panelGroup>
+
+            <h:commandButton value="Add new book"
+                             styleClass="commandButton"
+                             actionListener="#{authorBooks.createBook}"
+                             action="#{'authorDetails?faces-redirect=true&amp;authorId='.concat(authorBooks.author.id)}">
+                <f:param name="authorId" value="#{authorBooks.author.id}"/>
+            </h:commandButton>
+        </h:form>
+    </div>
+</h:body>
+</html>

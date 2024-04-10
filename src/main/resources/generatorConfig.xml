@@ -17,12 +17,24 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="lt.vu.mybatis.dao" targetProject="MAVEN" />
 
 
-        <table schema="public" tableName="team">
+        <!-- Author Table Configuration -->
+        <table schema="public" tableName="author">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
+            <columnOverride column="name" property="Name" />
+            <columnOverride column="surname" property="Surname" />
         </table>
-        <table schema="public" tableName="player">
+
+        <!-- Book Table Configuration -->
+        <table schema="public" tableName="book">
             <generatedKey column="id" identity="true" sqlStatement="JDBC" />
-            <ignoreColumn column="opt_lock_version" />
+            <columnOverride column="title" property="Title" />
         </table>
+
+        <!-- Genre Table Configuration -->
+        <table schema="public" tableName="genre">
+            <generatedKey column="id" identity="true" sqlStatement="JDBC" />
+            <columnOverride column="name" property="Name" />
+        </table>
+
     </context>
 </generatorConfiguration>

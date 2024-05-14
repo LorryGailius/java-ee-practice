@@ -47,36 +47,6 @@
                 </tbody>
             </table>
         </h:panelGroup>
-
-        <h3>Add new book</h3>
-        <h:form styleClass="add-form-no-gap">
-            <h4>Book title</h4>
-            <h:inputText a:placeholder="Book title" value="#{authorBooksByBatis.bookToCreate.title}" required="true"/>
-
-            <h:panelGroup rendered="#{empty authorBooksByBatis.availableGenres}">
-                <h:outputText value="No genres found"/>
-            </h:panelGroup>
-
-            <h:panelGroup rendered="#{not empty authorBooksByBatis.availableGenres}">
-                <div class="genre-checklist-wrapper">
-                    <h4>Select Genres</h4>
-                    <h:selectManyCheckbox styleClass="genre-checklist"
-                                          value="#{authorBooksByBatis.bookToCreate.genres}">
-                        <f:selectItems value="#{authorBooksByBatis.availableGenres}"
-                                       var="genre"
-                                       itemValue="#{genre}"
-                                       itemLabel="#{genre.name}"/>
-                    </h:selectManyCheckbox>
-                </div>
-            </h:panelGroup>
-
-            <h:commandButton value="Add new book"
-                             styleClass="commandButton"
-                             actionListener="#{authorBooksByBatis.createBook}"
-                             action="#{'authorDetails?faces-redirect=true&amp;authorId='.concat(authorBooksByBatis.author.id)}">
-                <f:param name="authorId" value="#{authorBooksByBatis.author.id}"/>
-            </h:commandButton>
-        </h:form>
     </div>
 </h:body>
 </html>

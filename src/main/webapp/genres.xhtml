@@ -32,6 +32,14 @@
             <h:commandButton styleClass="commandButton" value="Add new genre" actionListener="#{genres.createGenre}"
                              action="genres?faces-redirect=true"/>
         </h:form>
+
+        <h:form class="flex-col">
+            <div>
+                <h:commandButton styleClass="commandButton" value="Get genre popularity" action="#{getGenrePopularity.calculateGenrePopularity()}" disabled="#{getGenrePopularity.isGenrePopularityRunning()}"/>
+            </div>
+            <h:outputText value="#{getGenrePopularity.getGenrePopularityStatus()}" escape="false"/>
+        </h:form>
+
     </div>
 </h:body>
 </html>

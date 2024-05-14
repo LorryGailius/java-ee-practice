@@ -150,6 +150,13 @@ input[type="text"] {
     transform: translateY(2px);
 }
 
+.commandButton:disabled {
+    background-color: #F4F4F6;
+    box-shadow: none;
+    color: #B1B1C1;
+    cursor: not-allowed;
+}
+
 .navbar {
     background-color: #333;
     overflow: hidden;
@@ -190,4 +197,23 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.mx-4 {
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+.my-1 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.error {
+    color: red;
 }

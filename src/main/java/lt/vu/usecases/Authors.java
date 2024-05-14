@@ -2,7 +2,9 @@ package lt.vu.usecases;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.java.Log;
 import lt.vu.entities.Author;
+import lt.vu.interceptors.LoggedInvocation;
 import lt.vu.persistence.AuthorDAO;
 
 import javax.annotation.PostConstruct;
@@ -29,6 +31,7 @@ public class Authors {
     }
 
     @Transactional
+    @LoggedInvocation
     public void createAuthor(){
         this.authorDAO.persist(authorToCreate);
     }
@@ -36,5 +39,4 @@ public class Authors {
     private void loadAllAuthors(){
         this.allAuthors = authorDAO.loadAll();
     }
-
 }

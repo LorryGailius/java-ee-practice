@@ -21,6 +21,21 @@
     <div class="page">
         <h2>#{authorBooks.author.name} #{authorBooks.author.surname} Book list</h2>
 
+        <div class="flex-col">
+        <h:panelGroup rendered="#{not empty authorBooks.author.website}">
+            <h:outputText value="Website: "/>
+            <h:outputLink value="#{authorBooks.author.website}" target="_blank"> #{authorBooks.author.website}</h:outputLink>
+        </h:panelGroup>
+        </div>
+
+        <h:panelGroup class="flex-col">
+            <div>
+                <h:link outcome="updateAuthor?authorId=#{authorBooks.author.id}" value="Update author" styleClass="commandButton my-1"/>
+            </div>
+            <h:outputText class="error" value="Value was already modified by other user. If you want to override it - try again" rendered="#{param['error'] == 'optimistic-lock-exception'}" />
+        </h:panelGroup>
+
+
         <h:panelGroup rendered="#{empty authorBooks.author.books}">
             <h3>No books found</h3>
         </h:panelGroup>

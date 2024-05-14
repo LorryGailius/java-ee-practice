@@ -51,4 +51,27 @@ public class Author {
     public void setSurname(String surname) {
         Surname = surname;
     }
+
+    @Version
+    @Column(name = "OPT_LOCK_VERSION")
+    private Integer Version;
+
+    public Integer getVersion() {
+        return Version;
+    }
+
+    public void setVersion(Integer version) {
+        this.Version = version;
+    }
+
+    @Basic
+    private String Website;
+
+    public String getWebsite() {
+        return Website;
+    }
+
+    public void setWebsite(String website) {
+        this.Website = website;
+    }
 }

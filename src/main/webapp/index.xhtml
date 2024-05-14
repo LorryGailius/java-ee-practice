@@ -8,7 +8,7 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <h:outputStylesheet library="css" name="styles.css"/>
-    <title>Lab 1 | Laurynas Gailius</title>
+    <title>Lab 2 | Laurynas Gailius</title>
 </h:head>
 <h:body>
     <div class="navbar">
@@ -21,7 +21,7 @@
     <h2>Authors</h2>
     <ol>
         <ui:repeat value="#{authors.allAuthors}" var="author">
-            <li><h:link value="#{author.name} #{author.surname}" outcome="authorDetails?authorId=#{author.id}"/></li>
+            <li><h:link value="#{author.name} #{author.surname} #{author.books.size()}" outcome="authorDetails?authorId=#{author.id}"/></li>
         </ui:repeat>
     </ol>
 
